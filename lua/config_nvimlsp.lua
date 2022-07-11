@@ -24,7 +24,7 @@ local function configFunc(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, bufopts)
+  vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, bufopts) -- layout configs
   vim.keymap.set('n', 'gi', function() require('telescope.builtin').lsp_implementations() end, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<C-sh>', vim.lsp.buf.signature_help, bufopts)
