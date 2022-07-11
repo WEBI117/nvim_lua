@@ -1,15 +1,20 @@
--- require('plugins')
-
 local Plug = vim.fn['plug#']
 vim.call('plug#begin','~/.vim/plugged')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = function() vim.cmd('TSUpdate') end})
+-- Plug('scrooloose/nerdtree')
+-- Plug('preservim/nerdtree')
+Plug ('kyazdani42/nvim-web-devicons' )-- for file icons
+Plug ('kyazdani42/nvim-tree.lua')
+Plug('alvarosevilla95/luatab.nvim')
 Plug('jiangmiao/auto-pairs')
 Plug('ervandew/supertab')
-Plug('preservim/nerdtree')
 -- Plug('dracula/vim', {['as']='dracula'}) 
 Plug('marko-cerovac/material.nvim')
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug ('nvim-lua/plenary.nvim')
+Plug ('nvim-telescope/telescope.nvim')
+Plug ('neovim/nvim-lspconfig') -- Configurations for Nvim LSP
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 vim.call('plug#end')
 
 opts = {noremap=true,silent=true}
@@ -55,33 +60,16 @@ vim.keymap.set('v', '<Leader>y', '"*y', opts)
 vim.keymap.set('v', '<Leader>p', '"*p', opts)
 vim.keymap.set('n', '<Leader>p', '"*p', opts)
 
-
-require'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = {'python','typescript','lua','vim'},
-
-  -- Install languages synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- List of parsers to ignore installing
-  -- ignore_install = { "javascript" },
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- list of language that will be disabled
-    -- disable = { "viml" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-
+-- modules
+require('config_treesitter')
 require('config_telescope')
+require('config_nvimlsp')
+require('config_luatree')
+require('config_luatab')
+require('config_lualine')
+
+
+-- functions
 local function reloadPackages()
     for key, _ in pairs(package.loaded) do
         package.loaded[key] = nil
