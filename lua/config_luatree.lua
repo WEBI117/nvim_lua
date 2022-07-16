@@ -17,6 +17,7 @@ require("nvim-tree").setup({
     },
 })
 vim.keymap.set('n', '<F3>', function() vim.cmd('NvimTreeToggle') end, opts)
+vim.keymap.set('n', '<F4>', function() vim.cmd('NvimTreeRefresh') end, opts)
 
 
 
